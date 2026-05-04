@@ -30,6 +30,30 @@ def _cell(nd: int, seed: int = 7) -> CrowdingCell:
     )
 
 
+def test_semantic_similarity_axis_actually_moves_distractor_text():
+    """`cell.semantic_similarity` was previously declared but unused —
+    every cell shared the same paraphrase distribution. After round 4
+    the distractor pool is distinct per level: 'high' uses the gold
+    paraphrase verbatim, 'low' uses distant paraphrases.
+    """
+
+    def distractor_texts(sim: str) -> set[str]:
+        cell = CrowdingCell(
+            cell_id=f"sim_{sim}", n_distractors_per_gold=4,
+            semantic_similarity=sim, entity_overlap="partial",
+            answer_type_overlap=True, chunk_size=384,
+            chunk_mixing="bridge_buried", hop_count=2,
+            token_budget=1024, seed=99,
+        )
+        ds = build_dataset(cell, n_queries=8)
+        return {a.text for a in ds.atoms if a.role == "distractor"}
+
+    low, med, high = (distractor_texts(s) for s in ("low", "medium", "high"))
+    assert low != med, "low and medium produce identical distractors — axis is dead"
+    assert high != med, "high and medium produce identical distractors — axis is dead"
+    assert any("biography" in t or "early years" in t or "childhood" in t for t in low)
+
+
 def test_dataset_schema_invariants():
     ds = build_dataset(_cell(nd=5), n_queries=4)
     assert len(ds.queries) == 4
