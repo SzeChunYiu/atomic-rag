@@ -56,6 +56,25 @@ _PARAPHRASES_DIRECTED = [
 ]
 
 
+def _distractor_class_mix(similarity: str, k: int) -> str:
+    """Distractor class for the k-th distractor under the given similarity.
+
+    Defines the class-mix — independent of, and stronger than, the
+    paraphrase-pool axis. cos(distractor, query) increases monotonically
+    with similarity because we shift mass toward classes that overlap
+    the query's distinguishing entity (the film name).
+
+    low:    100% noise — no shared entity with query, no shared template
+    medium: 25% each of (entity_overlap, type_overlap, semantic, noise)
+    high:   100% semantic — every distractor mentions the query's film
+    """
+    if similarity == "low":
+        return "noise"
+    if similarity == "high":
+        return "semantic"
+    return ("entity_overlap", "type_overlap", "semantic", "noise")[k % 4]
+
+
 def _born_paraphrase_pool(similarity: str, gold_template: str) -> list[str]:
     """Pick the distractor-paraphrase pool for the given similarity level.
 
@@ -102,7 +121,7 @@ def _distractor_atoms(
     atoms: list[CrowdingAtom] = []
     pool = _born_paraphrase_pool(cell.semantic_similarity, gold_hop2_template)
     for k in range(n):
-        kind = ("entity_overlap", "type_overlap", "semantic", "noise")[k % 4]
+        kind = _distractor_class_mix(cell.semantic_similarity, k)
         if kind == "entity_overlap":
             wrong_country = rng.choice([c for c in _COUNTRIES if c != triple.country])
             text = rng.choice(pool).format(d=triple.director, c=wrong_country)

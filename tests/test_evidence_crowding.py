@@ -30,28 +30,47 @@ def _cell(nd: int, seed: int = 7) -> CrowdingCell:
     )
 
 
-def test_semantic_similarity_axis_actually_moves_distractor_text():
-    """`cell.semantic_similarity` was previously declared but unused —
-    every cell shared the same paraphrase distribution. After round 4
-    the distractor pool is distinct per level: 'high' uses the gold
-    paraphrase verbatim, 'low' uses distant paraphrases.
+def test_semantic_similarity_drives_monotone_cos_to_query():
+    """`semantic_similarity` must produce a monotone shift in
+    cos(distractor, query) for the axis to be meaningful for retrieval.
+    Round 4 wired the paraphrase pool but left high == medium in
+    cos-to-query; round 5 controls the distractor class-mix so that
+    high distractors share the *query's distinguishing entity* (film).
     """
+    import numpy as np
 
-    def distractor_texts(sim: str) -> set[str]:
+    from astro_cs_rag.benchmarks.evidence_crowding.runner import EmbeddingCache
+    from astro_cs_rag.indexing.embedders import TrigramEmbedder
+
+    def mean_cos_to_query(sim: str) -> float:
         cell = CrowdingCell(
-            cell_id=f"sim_{sim}", n_distractors_per_gold=4,
+            cell_id=f"m_{sim}", n_distractors_per_gold=8,
             semantic_similarity=sim, entity_overlap="partial",
             answer_type_overlap=True, chunk_size=384,
             chunk_mixing="bridge_buried", hop_count=2,
-            token_budget=1024, seed=99,
+            token_budget=1024, seed=2026,
         )
-        ds = build_dataset(cell, n_queries=8)
-        return {a.text for a in ds.atoms if a.role == "distractor"}
+        ds = build_dataset(cell, n_queries=12)
+        cache = EmbeddingCache(TrigramEmbedder())
+        cache.build(ds)
+        cs: list[float] = []
+        for q in ds.queries:
+            qv = cache.query_emb[q.query_id]
+            qn = qv / (np.linalg.norm(qv) + 1e-12)
+            for a in ds.atoms:
+                if a.role != "distractor" or not a.atom_id.startswith(q.query_id):
+                    continue
+                v = cache.atom_emb[cache.atom_idx[a.atom_id]]
+                vn = v / (np.linalg.norm(v) + 1e-12)
+                cs.append(float(qn @ vn))
+        return float(np.mean(cs))
 
-    low, med, high = (distractor_texts(s) for s in ("low", "medium", "high"))
-    assert low != med, "low and medium produce identical distractors — axis is dead"
-    assert high != med, "high and medium produce identical distractors — axis is dead"
-    assert any("biography" in t or "early years" in t or "childhood" in t for t in low)
+    low = mean_cos_to_query("low")
+    med = mean_cos_to_query("medium")
+    high = mean_cos_to_query("high")
+    assert low < med < high, (low, med, high)
+    # And the gap should be substantial — not a noise-level shift.
+    assert high - low > 0.10, (low, med, high)
 
 
 def test_dataset_schema_invariants():
