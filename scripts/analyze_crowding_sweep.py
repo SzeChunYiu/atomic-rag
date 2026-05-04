@@ -29,7 +29,60 @@ def _load_sweep(sweep_dir: Path) -> dict:
     ]
     summary = json.loads((sweep_dir / "phase_diagram_summary.json").read_text())
     config = json.loads((sweep_dir / "config.json").read_text())
-    return {"dir": sweep_dir, "rows": rows, "summary": summary, "config": config}
+    rd_path = sweep_dir / "rank_distribution.jsonl"
+    rank_dists: list[dict] = []
+    if rd_path.exists():
+        rank_dists = [json.loads(line) for line in rd_path.read_text().splitlines()]
+    return {
+        "dir": sweep_dir, "rows": rows, "summary": summary,
+        "config": config, "rank_dists": rank_dists,
+    }
+
+
+def _aggregate_rank_dist(rank_dists: list[dict]) -> list[dict]:
+    """Median across cells of per-role rank stats."""
+    by_role: dict[str, dict[str, list[float]]] = {}
+    for rd in rank_dists:
+        for s in rd["by_role"]:
+            entry = by_role.setdefault(s["role"], {
+                "median_global_rank": [],
+                "median_within_role_rank": [],
+                "pct_in_top1": [],
+                "pct_in_top5": [],
+                "n": [],
+            })
+            for k in entry:
+                entry[k].append(s[k])
+    out = []
+    for role in sorted(by_role):
+        e = by_role[role]
+        out.append(
+            {
+                "role": role,
+                "median_global_rank": sum(e["median_global_rank"]) / len(e["median_global_rank"]),
+                "median_within_role_rank": sum(e["median_within_role_rank"])
+                / len(e["median_within_role_rank"]),
+                "pct_in_top1": sum(e["pct_in_top1"]) / len(e["pct_in_top1"]),
+                "pct_in_top5": sum(e["pct_in_top5"]) / len(e["pct_in_top5"]),
+                "n_cells": len(e["n"]),
+            }
+        )
+    return out
+
+
+def _format_rank_table(agg: list[dict]) -> str:
+    headers = (
+        "| role | median global rank | median within-role rank | %top1 | %top5 |"
+    )
+    sep = "|---|---|---|---|---|"
+    lines = [headers, sep]
+    for s in agg:
+        lines.append(
+            f"| {s['role']} | {s['median_global_rank']:.1f} | "
+            f"{s['median_within_role_rank']:.1f} | {s['pct_in_top1']:.2f} | "
+            f"{s['pct_in_top5']:.2f} |"
+        )
+    return "\n".join(lines)
 
 
 def _baseline_failure_table(rows: list[dict]) -> list[tuple[str, int, float, float]]:
@@ -99,6 +152,15 @@ def _compose_report(sweeps: list[dict]) -> str:
             for s, tb, p, r in flagged:
                 out.append(f"> - `{s}` @ tb={tb}: P={p:.2f}, recall={r:.2f}")
         out.append("")
+        if sw.get("rank_dists"):
+            agg = _aggregate_rank_dist(sw["rank_dists"])
+            out.append("### Per-role atom rank (median across cells)")
+            out.append(
+                "Sanity check: a useful embedder ranks gold atoms near the top. "
+                "Median global rank ~N/2 means uniform-random — embedder is broken."
+            )
+            out.append(_format_rank_table(agg))
+            out.append("")
         out.append("### Phase fits per (system, similarity, budget)")
         out.append(_format_phase_table(_phase_table(sw["summary"])))
         out.append("")

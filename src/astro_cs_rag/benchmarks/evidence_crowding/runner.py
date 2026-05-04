@@ -138,9 +138,14 @@ def run_cell(
     dataset: CrowdingDataset,
     systems: list[str],
     embedder=None,
+    rank_distribution_out: list | None = None,
 ) -> list[CrowdingResult]:
     cache = EmbeddingCache(embedder)
     cache.build(dataset)
+    if rank_distribution_out is not None:
+        from astro_cs_rag.diagnostics.rank_distribution import compute, to_dict
+
+        rank_distribution_out.append(to_dict(compute(dataset, cache)))
     cell = dataset.cell
     rows: list[CrowdingResult] = []
     for sys_name in systems:
