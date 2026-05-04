@@ -1,0 +1,76 @@
+"""Smoke tests for the evidence-crowding generator + runner.
+
+These keep the synthetic benchmark honest:
+  - schema invariants (gold atoms tagged, doc_ids populated, chunks
+    accounted for)
+  - crowding monotonicity: P(support_chain_complete) decreases as
+    n_distractors_per_gold grows, for both registered baselines.
+"""
+
+from __future__ import annotations
+
+from astro_cs_rag.benchmarks.evidence_crowding.generator import build_dataset
+from astro_cs_rag.benchmarks.evidence_crowding.runner import run_cell
+from astro_cs_rag.benchmarks.evidence_crowding.schema import CrowdingCell
+from astro_cs_rag.benchmarks.evidence_crowding.sweeps import smoke_grid
+
+
+def _cell(nd: int, seed: int = 7) -> CrowdingCell:
+    return CrowdingCell(
+        cell_id=f"t_nd{nd}",
+        n_distractors_per_gold=nd,
+        semantic_similarity="medium",
+        entity_overlap="partial",
+        answer_type_overlap=True,
+        chunk_size=384,
+        chunk_mixing="bridge_buried",
+        hop_count=2,
+        token_budget=256,
+        seed=seed,
+    )
+
+
+def test_dataset_schema_invariants():
+    ds = build_dataset(_cell(nd=5), n_queries=4)
+    assert len(ds.queries) == 4
+    gold_atoms = [a for a in ds.atoms if a.is_gold]
+    # 2 gold atoms (hop1, hop2) per query
+    assert len(gold_atoms) == 8
+    # all atoms have a chunk and doc id assigned after packing
+    assert all(a.chunk_id and a.doc_id for a in ds.atoms)
+    chunk_ids = {c.chunk_id for c in ds.chunks}
+    assert {a.chunk_id for a in ds.atoms} <= chunk_ids
+    # gold_doc_ids populated per query, and the gold atoms live in those docs
+    by_atom = {a.atom_id: a for a in ds.atoms}
+    for q in ds.queries:
+        assert q.gold_doc_ids
+        assert {by_atom[aid].doc_id for aid in q.gold_atom_ids} == set(q.gold_doc_ids)
+
+
+def test_smoke_grid_runs_both_systems():
+    cells = list(smoke_grid())
+    assert len(cells) == 3
+    rows = []
+    for cell in cells:
+        ds = build_dataset(cell, n_queries=6)
+        rows.extend(run_cell(ds, systems=["atom_dense", "chunk_dense"]))
+    systems = {r.system_name for r in rows}
+    assert systems == {"atom_dense", "chunk_dense"}
+    # 3 cells * 6 queries * 2 systems
+    assert len(rows) == 36
+
+
+def test_crowding_degrades_support_chain_completion():
+    """As n_distractors grows, support-chain completion must not increase."""
+
+    def rate(nd: int, system: str) -> float:
+        ds = build_dataset(_cell(nd=nd), n_queries=12)
+        rows = run_cell(ds, systems=[system])
+        return sum(r.support_chain_complete for r in rows) / len(rows)
+
+    for sysname in ("atom_dense", "chunk_dense"):
+        r0 = rate(0, sysname)
+        r_high = rate(50, sysname)
+        # zero distractors should be (near-)perfect; heavy crowding strictly worse
+        assert r0 >= 0.9, (sysname, r0)
+        assert r_high < r0, (sysname, r0, r_high)
