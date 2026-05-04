@@ -104,6 +104,7 @@ def main() -> None:
     rows_path = args.out_dir / "crowding_sweep_results.jsonl"
     summary_path = args.out_dir / "phase_diagram_summary.json"
     config_path = args.out_dir / "config.json"
+    rank_dist_path = args.out_dir / "rank_distribution.jsonl"
 
     config_path.write_text(
         json.dumps(
@@ -134,14 +135,26 @@ def main() -> None:
     n_cells = 0
     n_rows = 0
     rows: list[dict] = []
-    with open(rows_path, "w", encoding="utf-8") as fh:
+    rank_dists: list[dict] = []
+    with open(rows_path, "w", encoding="utf-8") as fh, open(
+        rank_dist_path, "w", encoding="utf-8"
+    ) as rfh:
         for cell in cells_iter:
             dataset = build_dataset(cell, n_queries=args.n_queries)
-            cell_rows = run_cell(dataset, systems=args.systems, embedder=embedder)
+            rank_buf: list[dict] = []
+            cell_rows = run_cell(
+                dataset,
+                systems=args.systems,
+                embedder=embedder,
+                rank_distribution_out=rank_buf,
+            )
             for r in cell_rows:
                 d = r.model_dump()
                 fh.write(json.dumps(d) + "\n")
                 rows.append(d)
+            for rd in rank_buf:
+                rfh.write(json.dumps(rd) + "\n")
+                rank_dists.append(rd)
             n_cells += 1
             n_rows += len(cell_rows)
 
