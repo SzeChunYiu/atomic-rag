@@ -60,6 +60,25 @@ def test_smoke_grid_runs_both_systems():
     assert len(rows) == 36
 
 
+def test_iter2_beats_dense_at_low_distractors_constrained_budget():
+    """When budget is tight and distractors are few, expanding the query
+    with the top-1 atom should let hop2 reach the budget. At higher nd
+    this advantage collapses — also part of the published finding, not
+    asserted here.
+    """
+
+    def rate(nd: int, system: str, tb: int) -> float:
+        ds = build_dataset(_cell(nd=nd), n_queries=24)
+        rows = run_cell(ds, systems=[system])
+        return sum(r.support_chain_complete for r in rows) / len(rows)
+
+    dense_at_nd0_tb256 = rate(0, "atom_dense", 256)
+    iter2_at_nd0_tb256 = rate(0, "atom_iter2", 256)
+    assert iter2_at_nd0_tb256 > dense_at_nd0_tb256 + 0.10, (
+        dense_at_nd0_tb256, iter2_at_nd0_tb256
+    )
+
+
 def test_crowding_degrades_support_chain_completion():
     """As n_distractors grows, support-chain completion must not increase."""
 

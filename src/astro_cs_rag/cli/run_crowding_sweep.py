@@ -91,7 +91,7 @@ def main() -> None:
     ap.add_argument(
         "--systems",
         nargs="+",
-        default=["atom_dense", "chunk_dense"],
+        default=["atom_dense", "chunk_dense", "atom_iter2"],
     )
     ap.add_argument("--out_dir", type=Path, required=True)
     ap.add_argument("--seed_base", type=int, default=1000)

@@ -37,7 +37,7 @@ echo "[d04-study] grid=${GRID} n_queries=${N_QUERIES} dir=${STUDY_DIR}"
 HASH_DIR="${STUDY_DIR}/hash"
 python3 -m astro_cs_rag.cli.run_crowding_sweep \
     --grid "${GRID}" --n_queries "${N_QUERIES}" \
-    --systems atom_dense chunk_dense \
+    --systems atom_dense chunk_dense atom_iter2 \
     --embedder hash \
     --out_dir "${HASH_DIR}"
 
@@ -47,7 +47,7 @@ if [[ "${WITH_SBERT}" -eq 1 ]]; then
     SBERT_DIR="${STUDY_DIR}/sbert"
     python3 -m astro_cs_rag.cli.run_crowding_sweep \
         --grid "${GRID}" --n_queries "${N_QUERIES}" \
-        --systems atom_dense chunk_dense \
+        --systems atom_dense chunk_dense atom_iter2 \
         --embedder sbert --sbert_model "${SBERT_MODEL}" \
         --out_dir "${SBERT_DIR}"
     ANALYZE_ARGS+=("--sweep_dir" "${SBERT_DIR}")

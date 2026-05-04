@@ -122,8 +122,45 @@ def chunk_dense(dataset: CrowdingDataset, query_id: str, cache: EmbeddingCache) 
     return Selection(selected_atom_ids=selected, candidate_atom_ids=cand_atoms, selected_tokens=tokens)
 
 
+def atom_iter2(dataset: CrowdingDataset, query_id: str, cache: EmbeddingCache) -> Selection:
+    """Two-pass retrieval: top-1 atom drags hop2 within reach.
+
+    The query alone cannot lexically reach hop2 (the answer atom) — the
+    bridge entity (director) lives only in hop1. We retrieve hop1 first
+    (top-1 by cos(query, atom)), add its embedding to the query, and
+    re-rank atoms with the expanded query. Standard PRF / iterative
+    retrieval, used here as a baseline against atom_dense.
+    """
+    q = next(qq for qq in dataset.queries if qq.query_id == query_id)
+    qv = cache.query_emb[query_id]
+    assert cache.atom_emb is not None
+    top1 = _topk_by_cos(qv, cache.atom_emb, cache.atom_ids, k=1)
+    if not top1:
+        return atom_dense(dataset, query_id, cache)
+    bridge_idx = cache.atom_idx[top1[0]]
+    expanded = qv + cache.atom_emb[bridge_idx]
+    cands = _topk_by_cos(expanded, cache.atom_emb, cache.atom_ids, k=200)
+    by_id = {a.atom_id: a for a in dataset.atoms}
+    # ensure pass-1 winner is kept even if it ranks lower in pass 2
+    if top1[0] in cands:
+        cands.remove(top1[0])
+    cands = [top1[0], *cands]
+    selected: list[str] = []
+    tokens = 0
+    for aid in cands:
+        cost = max(1, len(by_id[aid].text.split()))
+        if tokens + cost > q.text.count(" ") + dataset.cell.token_budget:
+            break
+        selected.append(aid)
+        tokens += cost
+    return Selection(
+        selected_atom_ids=selected, candidate_atom_ids=cands, selected_tokens=tokens
+    )
+
+
 register_system("atom_dense", atom_dense)
 register_system("chunk_dense", chunk_dense)
+register_system("atom_iter2", atom_iter2)
 
 
 def _doc_recall(selected_atom_ids: list[str], gold_doc_ids: list[str], dataset: CrowdingDataset) -> float:
