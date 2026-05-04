@@ -1,0 +1,8 @@
+# Same run_dir as detect stage; queries_path enables coverage_trace.jsonl overlap logging.
+dataset: tiny
+seed: 0
+run_dir: runs/example_retrieve/REPLACE_RUN_ID
+index_dir: runs/tiny_index
+queries_path: data/tiny/queries.jsonl
+selector:
+  token_budget: 256

@@ -1,0 +1,20 @@
+dataset: tiny__bm25__greedy
+embedding:
+  batch_size: 16
+  cache_dir: null
+  model_name: BAAI/bge-m3
+  use_hash_embedder: true
+index_dir: runs/matrix/tiny__bm25__greedy/index_bundle
+paths:
+  corpus_path: data/tiny/corpus.jsonl
+  gold_path: null
+  output_dir: runs/matrix/tiny__bm25__greedy
+  queries_path: data/tiny/queries.jsonl
+retriever:
+  bm25_tokenizer: whitespace
+  candidate_top_n: 50
+  lockin_n_paraphrases: 4
+  lockin_paraphrase_model: llama3.1:8b-instruct-q4_K_M
+  lockin_use_fixed_pattern_phase: true
+  mode: bm25
+seed: 0

@@ -1,0 +1,10 @@
+# Set run_dir to the directory printed by rag-retrieve (under runs/example_retrieve/<id>).
+dataset: tiny
+seed: 0
+run_dir: runs/example_retrieve/REPLACE_RUN_ID
+index_dir: runs/tiny_index
+detector:
+  window: 5
+  threshold: 0.0
+  background_mode: tail
+  length_normalize_snr: false

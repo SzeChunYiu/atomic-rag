@@ -1,0 +1,33 @@
+chunk_overlap: 20
+chunk_size: 120
+dataset: irc_120_mmr
+detector:
+  background_mode: tail
+  window: 5
+embedding:
+  use_hash_embedder: true
+generator:
+  enabled: true
+  provider: stub
+metrics:
+  ks:
+  - 1
+  - 3
+  - 5
+paths:
+  corpus_path: /Users/billy/Desktop/projects/AI_engineering/RAG/runs/irc_robustness/ir_sweep/corpus_n5.jsonl
+  gold_path: /Users/billy/Desktop/projects/AI_engineering/RAG/data/tiny/gold.jsonl
+  output_dir: /Users/billy/Desktop/projects/AI_engineering/RAG/runs/irc_robustness/ir_sweep/n5_mmr
+  queries_path: /Users/billy/Desktop/projects/AI_engineering/RAG/data/tiny/queries.jsonl
+reranker:
+  enabled: false
+retriever:
+  candidate_top_n: 20
+  mode: fusion_rrf
+seed: 0
+selector:
+  anti_kt_R: 1.0
+  anti_kt_n_jets: 1
+  mmr_lambda: 0.7
+  mode: mmr
+  token_budget: 256

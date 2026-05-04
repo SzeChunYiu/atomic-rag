@@ -1,0 +1,21 @@
+dataset: hotpotqa_1k_cs384_fusion_rrf_baseline
+embedding:
+  batch_size: 16
+  cache_dir: null
+  model_name: BAAI/bge-m3
+  use_hash_embedder: false
+index_dir: runs/p4_lockin/hotpotqa_1k_cs384_fusion_rrf_baseline/index_bundle
+paths:
+  corpus_path: data/hotpotqa_1k/corpus.jsonl
+  gold_path: null
+  output_dir: runs/p4_lockin/hotpotqa_1k_cs384_fusion_rrf_baseline
+  queries_path: data/hotpotqa_1k/queries.jsonl
+retriever:
+  bm25_tokenizer: whitespace
+  candidate_top_n: 50
+  lockin_n_paraphrases: 4
+  lockin_paraphrase_cache_path: null
+  lockin_paraphrase_model: llama3.1:8b-instruct-q4_K_M
+  lockin_use_fixed_pattern_phase: true
+  mode: fusion_rrf
+seed: 0

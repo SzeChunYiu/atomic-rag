@@ -1,0 +1,6 @@
+{
+  "model_name": "BAAI/bge-reranker-v2-m3",
+  "top_n_in": 50,
+  "top_n_out": 20,
+  "rerank_seconds": 272.7928501452552
+}

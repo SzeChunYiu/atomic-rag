@@ -1,0 +1,24 @@
+dataset: tiny_stub
+seed: 0
+paths:
+  corpus_path: data/tiny/corpus.jsonl
+  queries_path: data/tiny/queries.jsonl
+  gold_path: data/tiny/gold.jsonl
+  output_dir: runs/tiny_stub
+chunk_size: 120
+chunk_overlap: 20
+retriever:
+  candidate_top_n: 10
+embedding:
+  use_hash_embedder: true
+reranker:
+  enabled: false
+detector:
+  window: 5
+selector:
+  token_budget: 256
+generator:
+  enabled: true
+  provider: stub
+metrics:
+  ks: [1, 3]

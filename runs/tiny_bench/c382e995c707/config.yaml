@@ -1,0 +1,15 @@
+dataset: tiny
+embedding:
+  batch_size: 32
+  model_name: sentence-transformers/all-MiniLM-L6-v2
+  use_hash_embedder: true
+index_dir: runs/tiny_bench/index_bundle
+paths:
+  corpus_path: data/tiny/corpus.jsonl
+  gold_path: null
+  output_dir: runs/tiny_bench
+  queries_path: data/tiny/queries.jsonl
+retriever:
+  bm25_tokenizer: whitespace
+  candidate_top_n: 20
+seed: 0

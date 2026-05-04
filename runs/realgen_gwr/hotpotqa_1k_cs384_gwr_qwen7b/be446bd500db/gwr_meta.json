@@ -1,0 +1,7 @@
+{
+  "top_k1": 20,
+  "top_k2": 10,
+  "top_n_out": 50,
+  "elapsed_seconds": 3.3456826210021973,
+  "n_queries": 1000
+}

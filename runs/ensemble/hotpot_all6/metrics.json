@@ -1,0 +1,7 @@
+{
+  "answer_em_mean": 0.452,
+  "answer_f1_mean": 0.5708415184815183,
+  "answer_count": 1000.0,
+  "disagreement_rate": 0.515,
+  "n_runs": 6
+}

@@ -1,0 +1,12 @@
+{
+  "run_id": "5438d0c1f433",
+  "dataset_name": "irc_120_anti_kt",
+  "corpus_doc_count": 55,
+  "query_count": 3,
+  "chunk_count": 55,
+  "seed": 0,
+  "paths": {
+    "index_dir": "/Users/billy/Desktop/projects/AI_engineering/RAG/runs/irc_robustness/ir_sweep/n50_anti_kt/index_bundle",
+    "queries_path": "/Users/billy/Desktop/projects/AI_engineering/RAG/data/tiny/queries.jsonl"
+  }
+}

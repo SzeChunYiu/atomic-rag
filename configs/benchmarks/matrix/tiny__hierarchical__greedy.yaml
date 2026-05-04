@@ -1,0 +1,44 @@
+dataset: tiny__hierarchical__greedy
+seed: 0
+paths:
+  corpus_path: data/tiny/corpus.jsonl
+  queries_path: data/tiny/queries.jsonl
+  gold_path: data/tiny/gold.jsonl
+  output_dir: runs/matrix/tiny__hierarchical__greedy
+chunk_size: 120
+chunk_overlap: 20
+embedding:
+  use_hash_embedder: true
+  model_name: BAAI/bge-m3
+  batch_size: 16
+side_indices:
+  hierarchical: true
+  hierarchical_branching: 6
+retriever:
+  candidate_top_n: 50
+  mode: hierarchical
+reranker:
+  enabled: false
+detector:
+  window: 10
+  background_mode: tail
+selector:
+  token_budget: 256
+  mode: greedy
+  anti_kt_R: 1.0
+  anti_kt_n_jets: 1
+  mmr_lambda: 0.7
+generator:
+  enabled: true
+  provider: stub
+  model_name: llama3.1:8b-instruct-q4_K_M
+  temperature: 0.0
+  seed: 0
+  max_tokens: 256
+  prompt_style: citation
+metrics:
+  ks:
+  - 1
+  - 3
+  - 5
+  - 10

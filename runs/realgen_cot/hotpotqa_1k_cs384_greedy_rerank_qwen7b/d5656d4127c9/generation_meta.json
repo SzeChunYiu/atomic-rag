@@ -1,0 +1,7 @@
+{
+  "provider": "transformers",
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "n_queries": 1000,
+  "wall_seconds": 1307.0006309640012,
+  "ollama_show": {}
+}

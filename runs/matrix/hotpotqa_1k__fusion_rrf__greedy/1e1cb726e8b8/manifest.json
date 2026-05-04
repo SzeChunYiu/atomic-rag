@@ -1,0 +1,12 @@
+{
+  "run_id": "1e1cb726e8b8",
+  "dataset_name": "hotpotqa_1k__fusion_rrf__greedy",
+  "corpus_doc_count": 9760,
+  "query_count": 1000,
+  "chunk_count": 15830,
+  "seed": 0,
+  "paths": {
+    "index_dir": "runs/matrix/hotpotqa_1k__fusion_rrf__greedy/index_bundle",
+    "queries_path": "data/hotpotqa_1k/queries.jsonl"
+  }
+}

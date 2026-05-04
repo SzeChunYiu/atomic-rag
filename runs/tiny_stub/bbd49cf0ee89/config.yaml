@@ -1,0 +1,16 @@
+dataset: tiny_stub
+embedding:
+  batch_size: 32
+  cache_dir: null
+  model_name: BAAI/bge-m3
+  use_hash_embedder: true
+index_dir: runs/tiny_stub/index_bundle
+paths:
+  corpus_path: data/tiny/corpus.jsonl
+  gold_path: null
+  output_dir: runs/tiny_stub
+  queries_path: data/tiny/queries.jsonl
+retriever:
+  bm25_tokenizer: whitespace
+  candidate_top_n: 10
+seed: 0

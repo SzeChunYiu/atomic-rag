@@ -1,0 +1,11 @@
+# Requires `rag-build-index --config configs/index.yaml` first (default index_dir: runs/tiny_index).
+dataset: tiny
+seed: 0
+paths:
+  queries_path: data/tiny/queries.jsonl
+  output_dir: runs/example_retrieve
+index_dir: runs/tiny_index
+embedding:
+  use_hash_embedder: true
+retriever:
+  candidate_top_n: 20

@@ -1,0 +1,8 @@
+{
+  "orig_gold_text_coverage": 0.779,
+  "bm25_gold_text_coverage": 0.786,
+  "delta": 0.007,
+  "improved": 32,
+  "worsened": 25,
+  "total": 1000
+}

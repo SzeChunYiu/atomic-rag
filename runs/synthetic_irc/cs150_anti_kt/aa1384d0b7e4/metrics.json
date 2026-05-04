@@ -1,0 +1,22 @@
+{
+  "recall@1_doc_mean": 0.03333333333333333,
+  "precision@1_chunk_mean": 0.03333333333333333,
+  "ndcg@1_chunk_mean": 0.03333333333333333,
+  "recall@3_doc_mean": 0.06666666666666667,
+  "precision@3_chunk_mean": 0.02222222222222222,
+  "ndcg@3_chunk_mean": 0.05,
+  "recall@5_doc_mean": 0.1,
+  "precision@5_chunk_mean": 0.020000000000000004,
+  "ndcg@5_chunk_mean": 0.06435588526911311,
+  "mean_reciprocal_rank_doc": 0.12843353718067677,
+  "evaluate_seconds": 0.0001961250090971589,
+  "retrieve_seconds": 0.010009667021222413,
+  "answer_em_mean": 0.0,
+  "answer_f1_mean": 0.0,
+  "citation_accuracy_mean": 0.03333333333333333,
+  "answer_count": 30.0,
+  "conservation_R_entity_mean": 0.4888888888888889,
+  "conservation_R_numeric_mean": 1.0,
+  "conservation_R_temporal_mean": 0.0,
+  "conservation_faithfulness_mean": 0.5037037037037037
+}

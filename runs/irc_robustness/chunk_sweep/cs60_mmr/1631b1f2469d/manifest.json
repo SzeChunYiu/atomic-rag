@@ -1,0 +1,12 @@
+{
+  "run_id": "1631b1f2469d",
+  "dataset_name": "irc_60_mmr",
+  "corpus_doc_count": 5,
+  "query_count": 3,
+  "chunk_count": 8,
+  "seed": 0,
+  "paths": {
+    "index_dir": "/Users/billy/Desktop/projects/AI_engineering/RAG/runs/irc_robustness/chunk_sweep/cs60_mmr/index_bundle",
+    "queries_path": "/Users/billy/Desktop/projects/AI_engineering/RAG/data/tiny/queries.jsonl"
+  }
+}

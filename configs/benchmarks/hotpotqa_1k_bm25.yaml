@@ -1,0 +1,23 @@
+dataset: hotpotqa_1k_bm25
+seed: 0
+paths:
+  corpus_path: data/hotpotqa_1k/corpus.jsonl
+  queries_path: data/hotpotqa_1k/queries.jsonl
+  gold_path: data/hotpotqa_1k/gold.jsonl
+  output_dir: runs/hotpotqa_1k_bm25
+chunk_size: 512
+chunk_overlap: 64
+retriever:
+  candidate_top_n: 50
+embedding:
+  use_hash_embedder: true
+reranker:
+  enabled: false
+detector:
+  window: 10
+selector:
+  token_budget: 1024
+generator:
+  enabled: false
+metrics:
+  ks: [1, 3, 5, 10]

@@ -1,0 +1,20 @@
+dataset: hotpotqa_1k_cs384_v4a0_3
+embedding:
+  batch_size: 16
+  cache_dir: null
+  model_name: BAAI/bge-m3
+  use_hash_embedder: false
+index_dir: runs/chunksize_sweep_v4/hotpotqa_1k_cs384_v4a0_3/index_bundle
+paths:
+  corpus_path: data/hotpotqa_1k/corpus.jsonl
+  gold_path: null
+  output_dir: runs/chunksize_sweep_v4/hotpotqa_1k_cs384_v4a0_3
+  queries_path: data/hotpotqa_1k/queries.jsonl
+retriever:
+  bm25_tokenizer: whitespace
+  candidate_top_n: 50
+  lockin_n_paraphrases: 4
+  lockin_paraphrase_model: llama3.1:8b-instruct-q4_K_M
+  lockin_use_fixed_pattern_phase: true
+  mode: dense
+seed: 0

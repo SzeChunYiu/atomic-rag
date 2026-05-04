@@ -1,0 +1,12 @@
+{
+  "run_id": "be446bd500db",
+  "dataset_name": "hotpotqa_1k_cs384_gwr_qwen7b_terse",
+  "corpus_doc_count": 9760,
+  "query_count": 1000,
+  "chunk_count": 20017,
+  "seed": 0,
+  "paths": {
+    "index_dir": "runs/realgen_gwr/hotpotqa_1k_cs384_gwr_qwen7b/index_bundle",
+    "queries_path": "data/hotpotqa_1k/queries.jsonl"
+  }
+}

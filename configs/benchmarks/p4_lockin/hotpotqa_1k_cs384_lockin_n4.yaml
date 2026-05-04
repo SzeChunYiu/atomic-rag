@@ -1,0 +1,36 @@
+chunk_overlap: 48
+chunk_size: 384
+dataset: hotpotqa_1k_cs384_lockin_n4
+detector:
+  background_mode: tail
+  window: 10
+embedding:
+  batch_size: 16
+  model_name: BAAI/bge-m3
+  use_hash_embedder: false
+generator:
+  enabled: true
+  provider: stub
+  model_name: stub
+  temperature: 0.0
+metrics:
+  ks: [1, 3, 5, 10]
+paths:
+  corpus_path: data/hotpotqa_1k/corpus.jsonl
+  gold_path: data/hotpotqa_1k/gold.jsonl
+  output_dir: runs/p4_lockin/hotpotqa_1k_cs384_lockin_n4
+  queries_path: data/hotpotqa_1k/queries.jsonl
+reranker:
+  enabled: false
+retriever:
+  candidate_top_n: 50
+  mode: lockin
+  lockin_n_paraphrases: 4
+  lockin_use_fixed_pattern_phase: true
+  lockin_paraphrase_cache_path: data/hotpotqa_1k/paraphrases_qwen7b_n4.jsonl
+seed: 0
+selector:
+  mmr_lambda: 0.7
+  mode: greedy
+  token_budget: 1024
+side_indices: {}

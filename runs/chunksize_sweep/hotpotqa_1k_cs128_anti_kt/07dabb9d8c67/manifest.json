@@ -1,0 +1,12 @@
+{
+  "run_id": "07dabb9d8c67",
+  "dataset_name": "hotpotqa_1k_cs128_anti_kt",
+  "corpus_doc_count": 9760,
+  "query_count": 1000,
+  "chunk_count": 53161,
+  "seed": 0,
+  "paths": {
+    "index_dir": "runs/chunksize_sweep/hotpotqa_1k_cs128_anti_kt/index_bundle",
+    "queries_path": "data/hotpotqa_1k/queries.jsonl"
+  }
+}

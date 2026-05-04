@@ -1,0 +1,20 @@
+dataset: irc_60_greedy
+embedding:
+  batch_size: 32
+  cache_dir: null
+  model_name: BAAI/bge-m3
+  use_hash_embedder: true
+index_dir: /Users/billy/Desktop/projects/AI_engineering/RAG/runs/irc_robustness/chunk_sweep/cs60_greedy/index_bundle
+paths:
+  corpus_path: /Users/billy/Desktop/projects/AI_engineering/RAG/data/tiny/corpus.jsonl
+  gold_path: null
+  output_dir: /Users/billy/Desktop/projects/AI_engineering/RAG/runs/irc_robustness/chunk_sweep/cs60_greedy
+  queries_path: /Users/billy/Desktop/projects/AI_engineering/RAG/data/tiny/queries.jsonl
+retriever:
+  bm25_tokenizer: whitespace
+  candidate_top_n: 20
+  lockin_n_paraphrases: 4
+  lockin_paraphrase_model: llama3.1:8b-instruct-q4_K_M
+  lockin_use_fixed_pattern_phase: true
+  mode: fusion_rrf
+seed: 0

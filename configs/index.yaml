@@ -1,0 +1,11 @@
+dataset: tiny
+seed: 0
+paths:
+  corpus_path: data/tiny/corpus.jsonl
+  output_dir: runs/tiny_index
+chunk_size: 120
+chunk_overlap: 20
+embedding:
+  use_hash_embedder: true
+  model_name: sentence-transformers/all-MiniLM-L6-v2
+  batch_size: 32

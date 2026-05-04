@@ -1,0 +1,12 @@
+{
+  "run_id": "74a4557b394e",
+  "dataset_name": "tiny__hierarchical__greedy",
+  "corpus_doc_count": 5,
+  "query_count": 3,
+  "chunk_count": 5,
+  "seed": 0,
+  "paths": {
+    "index_dir": "runs/matrix/tiny__hierarchical__greedy/index_bundle",
+    "queries_path": "data/tiny/queries.jsonl"
+  }
+}

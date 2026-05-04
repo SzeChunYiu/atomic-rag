@@ -1,0 +1,12 @@
+{
+  "run_id": "6334b6af758b",
+  "dataset_name": "irc_120_greedy",
+  "corpus_doc_count": 30,
+  "query_count": 3,
+  "chunk_count": 30,
+  "seed": 0,
+  "paths": {
+    "index_dir": "/Users/billy/Desktop/projects/AI_engineering/RAG/runs/irc_robustness/ir_sweep/n25_greedy/index_bundle",
+    "queries_path": "/Users/billy/Desktop/projects/AI_engineering/RAG/data/tiny/queries.jsonl"
+  }
+}

@@ -1,0 +1,30 @@
+{"query_id": "q_000", "text": "What does crab nebula reveal about its physical mechanism?", "gold_doc_ids": ["gold_000"], "metadata": {"answer": ["pulsar"], "topic": "crab nebula"}}
+{"query_id": "q_001", "text": "What does cosmic microwave background reveal about its physical mechanism?", "gold_doc_ids": ["gold_001"], "metadata": {"answer": ["two point seven kelvin"], "topic": "cosmic microwave background"}}
+{"query_id": "q_002", "text": "What does dark matter halo reveal about its physical mechanism?", "gold_doc_ids": ["gold_002"], "metadata": {"answer": ["rotation curve"], "topic": "dark matter halo"}}
+{"query_id": "q_003", "text": "What does active galactic nuclei reveal about its physical mechanism?", "gold_doc_ids": ["gold_003"], "metadata": {"answer": ["relativistic jet"], "topic": "active galactic nuclei"}}
+{"query_id": "q_004", "text": "What does gamma-ray burst reveal about its physical mechanism?", "gold_doc_ids": ["gold_004"], "metadata": {"answer": ["kilonova ejecta"], "topic": "gamma-ray burst"}}
+{"query_id": "q_005", "text": "What does neutron star merger reveal about its physical mechanism?", "gold_doc_ids": ["gold_005"], "metadata": {"answer": ["r-process nucleosynthesis"], "topic": "neutron star merger"}}
+{"query_id": "q_006", "text": "What does solar flare reveal about its physical mechanism?", "gold_doc_ids": ["gold_006"], "metadata": {"answer": ["coronal mass ejection"], "topic": "solar flare"}}
+{"query_id": "q_007", "text": "What does magnetar reveal about its physical mechanism?", "gold_doc_ids": ["gold_007"], "metadata": {"answer": ["ultrastrong magnetic field"], "topic": "magnetar"}}
+{"query_id": "q_008", "text": "What does blazar reveal about its physical mechanism?", "gold_doc_ids": ["gold_008"], "metadata": {"answer": ["polarization variability"], "topic": "blazar"}}
+{"query_id": "q_009", "text": "What does type ia supernova reveal about its physical mechanism?", "gold_doc_ids": ["gold_009"], "metadata": {"answer": ["standard candle distance"], "topic": "type ia supernova"}}
+{"query_id": "q_010", "text": "What does redshift survey reveal about its physical mechanism?", "gold_doc_ids": ["gold_010"], "metadata": {"answer": ["matter power spectrum"], "topic": "redshift survey"}}
+{"query_id": "q_011", "text": "What does cosmic ray reveal about its physical mechanism?", "gold_doc_ids": ["gold_011"], "metadata": {"answer": ["GZK cutoff"], "topic": "cosmic ray"}}
+{"query_id": "q_012", "text": "What does planetary transit reveal about its physical mechanism?", "gold_doc_ids": ["gold_012"], "metadata": {"answer": ["limb darkening"], "topic": "planetary transit"}}
+{"query_id": "q_013", "text": "What does interstellar dust reveal about its physical mechanism?", "gold_doc_ids": ["gold_013"], "metadata": {"answer": ["polarization signal"], "topic": "interstellar dust"}}
+{"query_id": "q_014", "text": "What does globular cluster reveal about its physical mechanism?", "gold_doc_ids": ["gold_014"], "metadata": {"answer": ["horizontal branch"], "topic": "globular cluster"}}
+{"query_id": "q_015", "text": "What does dark energy reveal about its physical mechanism?", "gold_doc_ids": ["gold_015"], "metadata": {"answer": ["accelerated expansion"], "topic": "dark energy"}}
+{"query_id": "q_016", "text": "What does primordial black hole reveal about its physical mechanism?", "gold_doc_ids": ["gold_016"], "metadata": {"answer": ["gravitational microlensing"], "topic": "primordial black hole"}}
+{"query_id": "q_017", "text": "What does pulsar timing array reveal about its physical mechanism?", "gold_doc_ids": ["gold_017"], "metadata": {"answer": ["Hellings-Downs curve"], "topic": "pulsar timing array"}}
+{"query_id": "q_018", "text": "What does HII region reveal about its physical mechanism?", "gold_doc_ids": ["gold_018"], "metadata": {"answer": ["Str\u00f6mgren sphere"], "topic": "HII region"}}
+{"query_id": "q_019", "text": "What does supernova explosion mechanism reveal about its physical mechanism?", "gold_doc_ids": ["gold_019"], "metadata": {"answer": ["shock revival"], "topic": "supernova explosion mechanism"}}
+{"query_id": "q_020", "text": "What does white dwarf cooling reveal about its physical mechanism?", "gold_doc_ids": ["gold_020"], "metadata": {"answer": ["luminosity function"], "topic": "white dwarf cooling"}}
+{"query_id": "q_021", "text": "What does microquasar reveal about its physical mechanism?", "gold_doc_ids": ["gold_021"], "metadata": {"answer": ["radio jet"], "topic": "microquasar"}}
+{"query_id": "q_022", "text": "What does X-ray binary reveal about its physical mechanism?", "gold_doc_ids": ["gold_022"], "metadata": {"answer": ["accretion disk corona"], "topic": "X-ray binary"}}
+{"query_id": "q_023", "text": "What does dark photon reveal about its physical mechanism?", "gold_doc_ids": ["gold_023"], "metadata": {"answer": ["indirect detection signal"], "topic": "dark photon"}}
+{"query_id": "q_024", "text": "What does nuclear matter reveal about its physical mechanism?", "gold_doc_ids": ["gold_024"], "metadata": {"answer": ["neutron star radius"], "topic": "nuclear matter"}}
+{"query_id": "q_025", "text": "What does solar neutrinos reveal about its physical mechanism?", "gold_doc_ids": ["gold_025"], "metadata": {"answer": ["matter induced oscillation"], "topic": "solar neutrinos"}}
+{"query_id": "q_026", "text": "What does cosmic strings reveal about its physical mechanism?", "gold_doc_ids": ["gold_026"], "metadata": {"answer": ["string tension constraint"], "topic": "cosmic strings"}}
+{"query_id": "q_027", "text": "What does 21 cm signal reveal about its physical mechanism?", "gold_doc_ids": ["gold_027"], "metadata": {"answer": ["global brightness temperature"], "topic": "21 cm signal"}}
+{"query_id": "q_028", "text": "What does planet 9 reveal about its physical mechanism?", "gold_doc_ids": ["gold_028"], "metadata": {"answer": ["perihelion clustering"], "topic": "planet 9"}}
+{"query_id": "q_029", "text": "What does inflation reveal about its physical mechanism?", "gold_doc_ids": ["gold_029"], "metadata": {"answer": ["tensor to scalar ratio"], "topic": "inflation"}}

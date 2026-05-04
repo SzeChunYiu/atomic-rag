@@ -1,0 +1,6 @@
+{
+  "recall@1_doc_mean": 1.0,
+  "recall@3_doc_mean": 1.0,
+  "recall@5_doc_mean": 1.0,
+  "mean_reciprocal_rank_doc": 1.0
+}

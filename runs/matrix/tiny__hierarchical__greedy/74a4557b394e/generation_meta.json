@@ -1,0 +1,7 @@
+{
+  "provider": "stub",
+  "model": "stub",
+  "n_queries": 3,
+  "wall_seconds": 7.362500764429569e-05,
+  "ollama_show": {}
+}

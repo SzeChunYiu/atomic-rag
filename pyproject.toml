@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "astro-cs-rag"
+version = "0.1.0"
+description = "Atomic CS-RAG research codebase (scaffold)"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "numpy>=1.26",
+  "pydantic>=2.6",
+  "pyyaml>=6.0",
+  "rank-bm25>=0.2.2",
+  "sentence-transformers>=3.0.0",
+  "torch>=2.1",
+  "typer>=0.12",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.4"]
+hf = ["datasets>=2.18", "huggingface-hub>=0.23"]
+
+[project.scripts]
+rag-build-index = "astro_cs_rag.cli.build_index:main"
+rag-retrieve = "astro_cs_rag.cli.retrieve:main"
+rag-detect = "astro_cs_rag.cli.detect:main"
+rag-rerank = "astro_cs_rag.cli.rerank:main"
+rag-select = "astro_cs_rag.cli.select:main"
+rag-generate = "astro_cs_rag.cli.generate:main"
+rag-evaluate = "astro_cs_rag.cli.evaluate:main"
+rag-run-benchmark = "astro_cs_rag.cli.run_benchmark:main"
+rag-sanity-check = "astro_cs_rag.cli.sanity_check:main"
+rag-error-analysis = "astro_cs_rag.cli.error_analysis:main"
+rag-ablation = "astro_cs_rag.cli.ablation:main"
+rag-prepare-data = "astro_cs_rag.cli.prepare_data:main"
+rag-decompose = "astro_cs_rag.cli.decompose:main"
+rag-profile = "astro_cs_rag.cli.profile:main"
+rag-build-asimov = "astro_cs_rag.cli.build_asimov:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

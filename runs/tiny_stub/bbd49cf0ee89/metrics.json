@@ -1,0 +1,15 @@
+{
+  "recall@1_doc_mean": 1.0,
+  "precision@1_chunk_mean": 1.0,
+  "ndcg@1_chunk_mean": 1.0,
+  "recall@3_doc_mean": 1.0,
+  "precision@3_chunk_mean": 0.3333333333333333,
+  "ndcg@3_chunk_mean": 1.0,
+  "mean_reciprocal_rank_doc": 1.0,
+  "evaluate_seconds": 3.3374992199242115e-05,
+  "retrieve_seconds": 0.0010983340034727007,
+  "answer_em_mean": 0.0,
+  "answer_f1_mean": 0.0,
+  "citation_accuracy_mean": 1.0,
+  "answer_count": 3.0
+}

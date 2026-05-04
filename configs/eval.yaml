@@ -1,0 +1,10 @@
+# Point run_dir at a completed benchmark or retrieve pipeline folder with candidates.jsonl.
+dataset: tiny
+seed: 0
+paths:
+  queries_path: data/tiny/queries.jsonl
+  gold_path: data/tiny/gold.jsonl
+run_dir: runs/tiny_bench/REPLACE_RUN_ID
+index_dir: runs/tiny_index
+metrics:
+  ks: [1, 3, 5]

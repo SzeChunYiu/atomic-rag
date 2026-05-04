@@ -1,0 +1,8 @@
+# Run after evaluate; uses candidates (+ optional selected_context) under run_dir.
+dataset: tiny
+run_dir: runs/tiny_bench/REPLACE_RUN_ID
+index_dir: runs/tiny_index
+paths:
+  queries_path: data/tiny/queries.jsonl
+  gold_path: data/tiny/gold.jsonl
+baseline_run_dir: null

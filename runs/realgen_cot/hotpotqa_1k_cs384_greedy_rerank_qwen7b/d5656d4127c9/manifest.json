@@ -1,0 +1,12 @@
+{
+  "run_id": "d5656d4127c9",
+  "dataset_name": "hotpotqa_1k_cs384_greedy_rerank_qwen7b_cot",
+  "corpus_doc_count": 9760,
+  "query_count": 1000,
+  "chunk_count": 20017,
+  "seed": 0,
+  "paths": {
+    "index_dir": "runs/realgen_cot/hotpotqa_1k_cs384_greedy_rerank_qwen7b/index_bundle",
+    "queries_path": "data/hotpotqa_1k/queries.jsonl"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "archetypes": {
+    "plateau": {
+      "n": 2.0,
+      "recall@1_mean": 1.0,
+      "recall@3_mean": 1.0
+    },
+    "diffuse": {
+      "n": 1.0,
+      "recall@1_mean": 1.0,
+      "recall@3_mean": 1.0
+    }
+  },
+  "query_count": 3.0
+}

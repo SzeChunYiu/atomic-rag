@@ -1,0 +1,20 @@
+{
+  "anti_vs_greedy": {
+    "selector_a": "anti_kt",
+    "selector_b": "greedy",
+    "p_a_lower_stdev": 0.7874,
+    "diff_mean": -0.03191646647037819,
+    "diff_p05": -0.10006859789717942,
+    "diff_p95": 0.03943784155312975,
+    "n_resamples": 5000
+  },
+  "anti_vs_mmr": {
+    "selector_a": "anti_kt",
+    "selector_b": "mmr",
+    "p_a_lower_stdev": 0.0,
+    "diff_mean": 0.12156521059189501,
+    "diff_p05": 0.07028580029264378,
+    "diff_p95": 0.16479479952653578,
+    "n_resamples": 5000
+  }
+}

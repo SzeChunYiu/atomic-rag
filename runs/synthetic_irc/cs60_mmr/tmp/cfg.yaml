@@ -1,0 +1,32 @@
+chunk_overlap: 10
+chunk_size: 60
+dataset: synthetic_irc_60_mmr
+detector:
+  window: 5
+embedding:
+  use_hash_embedder: true
+generator:
+  enabled: true
+  provider: stub
+metrics:
+  ks:
+  - 1
+  - 3
+  - 5
+paths:
+  corpus_path: /Users/billy/Desktop/projects/AI_engineering/RAG/data/synthetic_irc/corpus.jsonl
+  gold_path: /Users/billy/Desktop/projects/AI_engineering/RAG/data/synthetic_irc/gold.jsonl
+  output_dir: /Users/billy/Desktop/projects/AI_engineering/RAG/runs/synthetic_irc/cs60_mmr
+  queries_path: /Users/billy/Desktop/projects/AI_engineering/RAG/data/synthetic_irc/queries.jsonl
+reranker:
+  enabled: false
+retriever:
+  candidate_top_n: 30
+  mode: fusion_rrf
+seed: 0
+selector:
+  anti_kt_R: 1.0
+  anti_kt_n_jets: 1
+  mmr_lambda: 0.7
+  mode: mmr
+  token_budget: 240

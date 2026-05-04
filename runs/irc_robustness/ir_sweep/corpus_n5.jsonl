@@ -1,0 +1,10 @@
+{"doc_id": "doc_alpha", "text": "The Crab Nebula is a supernova remnant in Taurus. It contains a pulsar.", "metadata": {"source": "toy"}}
+{"doc_id": "doc_beta", "text": "Cosmic microwave background radiation is about 2.7 Kelvin.", "metadata": {"source": "toy"}}
+{"doc_id": "doc_gamma", "text": "Active galactic nuclei can show relativistic jets.", "metadata": {"source": "toy"}}
+{"doc_id": "doc_delta", "text": "Gravitational waves were first detected by LIGO from merging black holes.", "metadata": {"source": "toy"}}
+{"doc_id": "doc_epsilon", "text": "Interstellar dust polarizes starlight and affects extinction curves.", "metadata": {"source": "toy"}}
+{"doc_id": "distractor_0000", "text": "This is irrelevant filler passage number 0 about an unrelated topic.", "metadata": {"role": "distractor"}}
+{"doc_id": "distractor_0001", "text": "This is irrelevant filler passage number 1 about an unrelated topic.", "metadata": {"role": "distractor"}}
+{"doc_id": "distractor_0002", "text": "This is irrelevant filler passage number 2 about an unrelated topic.", "metadata": {"role": "distractor"}}
+{"doc_id": "distractor_0003", "text": "This is irrelevant filler passage number 3 about an unrelated topic.", "metadata": {"role": "distractor"}}
+{"doc_id": "distractor_0004", "text": "This is irrelevant filler passage number 4 about an unrelated topic.", "metadata": {"role": "distractor"}}

@@ -1,0 +1,12 @@
+{
+  "run_id": "3d35a45b2621",
+  "dataset_name": "irc_120_mmr",
+  "corpus_doc_count": 5,
+  "query_count": 3,
+  "chunk_count": 5,
+  "seed": 0,
+  "paths": {
+    "index_dir": "/Users/billy/Desktop/projects/AI_engineering/RAG/runs/irc_robustness/ir_sweep/n0_mmr/index_bundle",
+    "queries_path": "/Users/billy/Desktop/projects/AI_engineering/RAG/data/tiny/queries.jsonl"
+  }
+}

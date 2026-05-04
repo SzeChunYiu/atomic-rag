@@ -1,0 +1,25 @@
+{
+  "metric": "gold_pair_coverage",
+  "n_resamples": 1000,
+  "selectors": {
+    "anti_kt": {
+      "stdev_mean": 0.08514167592133837,
+      "stdev_p05": 0.02545875386086577,
+      "stdev_p95": 0.12743169190062326
+    },
+    "greedy": {
+      "stdev_mean": 0.10555860663424213,
+      "stdev_p05": 0.062112999374994184,
+      "stdev_p95": 0.1544604308273094
+    },
+    "mmr": {
+      "stdev_mean": 0.01992751192790982,
+      "stdev_p05": 0.012422599874998832,
+      "stdev_p95": 0.02721655269759087
+    }
+  },
+  "paired_diff_anti_minus_greedy": {
+    "mean": -0.020416930712903757,
+    "p_anti_lower_than_greedy": 0.759
+  }
+}

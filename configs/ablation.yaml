@@ -1,0 +1,12 @@
+# Runs full benchmark per variant; writes under output_dir/<variant>/workspace.
+base_config_path: configs/benchmark.yaml
+output_dir: runs/ablation_demo
+variants:
+  - name: small_pool
+    overrides:
+      retriever:
+        candidate_top_n: 5
+  - name: tight_budget
+    overrides:
+      selector:
+        token_budget: 128

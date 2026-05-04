@@ -1,0 +1,12 @@
+{
+  "run_id": "17dbb8af81eb",
+  "dataset_name": "synthetic_irc_60_greedy",
+  "corpus_doc_count": 90,
+  "query_count": 30,
+  "chunk_count": 288,
+  "seed": 0,
+  "paths": {
+    "index_dir": "/Users/billy/Desktop/projects/AI_engineering/RAG/runs/synthetic_irc/cs60_greedy/index_bundle",
+    "queries_path": "/Users/billy/Desktop/projects/AI_engineering/RAG/data/synthetic_irc/queries.jsonl"
+  }
+}

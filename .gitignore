@@ -1,0 +1,63 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.egg-info/
+dist/
+build/
+
+# Environment
+.env
+.venv/
+venv/
+
+# Model weights & binary artifacts
+*.pt
+*.bin
+*.safetensors
+*.gguf
+*.onnx
+*.npz
+*.npy
+*.h5
+
+# Large run artifacts (bulk data — too big for git)
+runs/**/index_bundle/
+runs/**/candidates.jsonl
+runs/**/evidence_atoms.jsonl
+runs/**/scores.jsonl
+runs/**/selected_context.jsonl
+runs/**/selected_atoms.jsonl
+runs/**/generated_answers.jsonl
+runs/**/generated_answers_cpv.jsonl
+runs/**/conservation_residuals.jsonl
+runs/**/coverage_trace.jsonl
+runs/**/dropped_candidates.jsonl
+runs/**/chunks.jsonl
+
+# What IS kept in runs/ (findings — small, human-readable):
+#   metrics.json       — EM / F1 / citation accuracy per run
+#   config.yaml        — exact hyperparameters used
+#   report.md          — per-run narrative summary
+#   manifest.json      — dataset + model provenance
+#   run_meta.json      — timing, hardware, git hash
+#   generation_meta.json / rerank_meta.json / timing.json
+#   runs/analysis/     — aggregated results tables
+
+# Raw corpus data (large, not redistributable)
+data/*/corpus.jsonl
+data/*/embeddings/
+data/**/dense_index*
+
+# Small synthetic/toy datasets are fine to keep
+!data/tiny/
+!data/synthetic_irc/
+
+# SLURM logs (ephemeral, regenerable)
+logs/*.out
+logs/*.err
+
+# OS
+.DS_Store

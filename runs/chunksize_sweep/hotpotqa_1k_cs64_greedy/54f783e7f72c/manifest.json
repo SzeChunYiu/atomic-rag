@@ -1,0 +1,12 @@
+{
+  "run_id": "54f783e7f72c",
+  "dataset_name": "hotpotqa_1k_cs64_greedy",
+  "corpus_doc_count": 9760,
+  "query_count": 1000,
+  "chunk_count": 102817,
+  "seed": 0,
+  "paths": {
+    "index_dir": "runs/chunksize_sweep/hotpotqa_1k_cs64_greedy/index_bundle",
+    "queries_path": "data/hotpotqa_1k/queries.jsonl"
+  }
+}

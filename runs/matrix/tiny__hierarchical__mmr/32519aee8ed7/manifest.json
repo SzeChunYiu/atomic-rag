@@ -1,0 +1,12 @@
+{
+  "run_id": "32519aee8ed7",
+  "dataset_name": "tiny__hierarchical__mmr",
+  "corpus_doc_count": 5,
+  "query_count": 3,
+  "chunk_count": 5,
+  "seed": 0,
+  "paths": {
+    "index_dir": "runs/matrix/tiny__hierarchical__mmr/index_bundle",
+    "queries_path": "data/tiny/queries.jsonl"
+  }
+}

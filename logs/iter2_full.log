@@ -1,0 +1,32 @@
+seed=0 cs=50 sel=greedy cov=0.358
+seed=0 cs=50 sel=anti_kt cov=0.358
+seed=0 cs=50 sel=mmr cov=0.008
+seed=0 cs=63 sel=greedy cov=0.650
+seed=0 cs=63 sel=anti_kt cov=0.650
+seed=0 cs=63 sel=mmr cov=0.017
+seed=0 cs=76 sel=greedy cov=0.433
+seed=0 cs=76 sel=anti_kt cov=0.433
+Traceback (most recent call last):
+  File "/Users/billy/Desktop/projects/AI_engineering/RAG/scripts/synthetic_irc_iter2.py", line 296, in <module>
+    main()
+    ~~~~^^
+  File "/Users/billy/Desktop/projects/AI_engineering/RAG/scripts/synthetic_irc_iter2.py", line 275, in main
+    row = run_one(args.out, paths, cs, sel, seed)
+  File "/Users/billy/Desktop/projects/AI_engineering/RAG/scripts/synthetic_irc_iter2.py", line 201, in run_one
+    run_dir = benchmark_run(cfg)
+  File "/Users/billy/Desktop/projects/AI_engineering/RAG/src/astro_cs_rag/pipeline/benchmark.py", line 76, in benchmark_run
+    detect_run(det)
+    ~~~~~~~~~~^^^^^
+  File "/Users/billy/Desktop/projects/AI_engineering/RAG/src/astro_cs_rag/pipeline/detect_run.py", line 71, in detect_run
+    writer.write_jsonl("evidence_atoms.jsonl", atoms)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/billy/Desktop/projects/AI_engineering/RAG/src/astro_cs_rag/artifacts/writer.py", line 56, in write_jsonl
+    path.write_text("\n".join(lines) + ("\n" if lines else ""), encoding="utf-8")
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/billy/miniforge3/lib/python3.13/pathlib/_local.py", line 555, in write_text
+    return PathBase.write_text(self, data, encoding, errors, newline)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/billy/miniforge3/lib/python3.13/pathlib/_abc.py", line 652, in write_text
+    return f.write(data)
+           ~~~~~~~^^^^^^
+OSError: [Errno 28] No space left on device

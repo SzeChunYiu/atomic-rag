@@ -1,0 +1,63 @@
+{
+  "n_seeds": 5,
+  "n_chunk_sizes": 20,
+  "n_topics": 120,
+  "n_distractors": 240,
+  "comparisons": {
+    "anti_kt_v1_vs_greedy": {
+      "a": "anti_kt_v1",
+      "b": "greedy",
+      "n_pairs": 100,
+      "mean_diff": 0.1861666666666666,
+      "p_a_higher": 1.0,
+      "ci95": [
+        0.15274791666666668,
+        0.21916874999999997
+      ]
+    },
+    "anti_kt_v2_vs_greedy": {
+      "a": "anti_kt_v2",
+      "b": "greedy",
+      "n_pairs": 100,
+      "mean_diff": 0.0,
+      "p_a_higher": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    "anti_kt_v3_vs_greedy": {
+      "a": "anti_kt_v3",
+      "b": "greedy",
+      "n_pairs": 100,
+      "mean_diff": 0.20841666666666675,
+      "p_a_higher": 1.0,
+      "ci95": [
+        0.17458333333333337,
+        0.24225416666666666
+      ]
+    },
+    "anti_kt_v3_vs_anti_kt_v1": {
+      "a": "anti_kt_v3",
+      "b": "anti_kt_v1",
+      "n_pairs": 100,
+      "mean_diff": 0.022250000000000002,
+      "p_a_higher": 1.0,
+      "ci95": [
+        0.019166666666666676,
+        0.02533333333333334
+      ]
+    },
+    "anti_kt_v3_vs_anti_kt_v2": {
+      "a": "anti_kt_v3",
+      "b": "anti_kt_v2",
+      "n_pairs": 100,
+      "mean_diff": 0.20841666666666675,
+      "p_a_higher": 1.0,
+      "ci95": [
+        0.17458333333333337,
+        0.24225416666666666
+      ]
+    }
+  }
+}

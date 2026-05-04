@@ -1,0 +1,14 @@
+{
+  "n": 1000,
+  "F1": 0.4290451151517794,
+  "EM": 0.335,
+  "cit_acc": 0.462563888888889,
+  "lambda_type": 0.05,
+  "prompt_style": "citation",
+  "selector": "submodular_fast",
+  "doc_diversity_bonus": 0.02,
+  "max_atoms_per_doc": 0,
+  "adaptive_top_k": false,
+  "gen_batch_size": 8,
+  "elapsed_sec": 401.3736457824707
+}

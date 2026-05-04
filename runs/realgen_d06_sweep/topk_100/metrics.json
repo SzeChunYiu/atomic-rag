@@ -1,0 +1,10 @@
+{
+  "n": 1000,
+  "F1": 0.38539579657218187,
+  "EM": 0.297,
+  "cit_acc": 0.3748023809523809,
+  "lambda_type": 0.05,
+  "prompt_style": "citation",
+  "selector": "submodular",
+  "elapsed_sec": 633.0245656967163
+}

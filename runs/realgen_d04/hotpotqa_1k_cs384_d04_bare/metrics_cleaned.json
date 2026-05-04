@@ -1,0 +1,9 @@
+{
+  "n": 1000,
+  "cit_acc_original": 0.6998559523809523,
+  "cit_acc_cleaned": 0.7377489177489177,
+  "n_replaced": 0,
+  "n_dropped": 994,
+  "mode": "drop",
+  "min_overlap": 1
+}

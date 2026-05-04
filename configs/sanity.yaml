@@ -1,0 +1,2 @@
+# Any run folder that contains config.yaml, manifest.json, candidates.jsonl.
+run_dir: runs/example_retrieve/REPLACE_RUN_ID
