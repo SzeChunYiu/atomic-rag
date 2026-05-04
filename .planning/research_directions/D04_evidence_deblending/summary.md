@@ -58,11 +58,27 @@ extraction patterns, contradiction detection.
 
 ## Deliverables checklist (per directions doc)
 - [x] `summary.md`
-- [ ] `prior_work.md`
-- [ ] `novelty.md`
-- [ ] `algorithm.md`
-- [ ] `bottleneck_analysis.md`
-- [ ] `benchmark.md`
+- [x] `prior_work.md`
+- [x] `novelty.md`
+- [x] `algorithm.md`
+- [x] `bottleneck_analysis.md`
+- [x] `implementation_spec.md`
 - [ ] `failure_cases.md`
-- [ ] `implementation_spec.md`
 - [ ] `decision.md`
+
+## Refinement (May 2026): crowding-as-phase-transition framing
+The original D04 spec scored *atoms* with structured matching; the
+refinement reframes the problem as **source detection under evidence
+crowding** with a measurable detectability threshold C\*. New planning
+files extend this directory rather than forking a new direction:
+
+- `crowding_benchmark.md` — controlled synthetic sweeps over
+  distractor density, similarity, and bridge-hop distance.
+- `phase_transition.md` — what we measure and how falsification works.
+- `local_background.md` — typed/entity/annulus background detectability
+  as the proposed method.
+
+Atom substrate (`atoms/deblend.py`, `scripts/build_atoms.py`) already
+exists and is reused. The new code lives under
+`diagnostics/{gold_atom_audit,crowding_metrics,blending_metrics,phase_transition}.py`
+and `benchmarks/evidence_crowding/`.

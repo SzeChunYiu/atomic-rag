@@ -38,7 +38,13 @@ class SentenceEmbedder:
 
 
 class HashEmbedder:
-    """Deterministic low-dimensional vectors for fast CI tests (no torch)."""
+    """Deterministic low-dimensional vectors for fast CI tests (no torch).
+
+    NOTE: this is a hash of the *whole string* — it has no token- or
+    content-level signal, so cos(query, atom) is essentially random
+    across paraphrases. Use :class:`TrigramEmbedder` for benchmarks
+    that need lexical signal without a real model.
+    """
 
     dim = 32
 
@@ -53,3 +59,36 @@ class HashEmbedder:
         if not rows:
             return np.zeros((0, self.dim), dtype=np.float32)
         return np.stack(rows, axis=0)
+
+
+class TrigramEmbedder:
+    """Hashed character-trigram TF — CPU-only, deterministic, has signal.
+
+    Each text becomes a `dim`-dim L2-normalised vector of hashed
+    character-trigram counts (lowercased). Cosine of two encodings is
+    a noisy approximation of trigram-Jaccard, which is enough to make
+    cos(query, semantically-related atom) > cos(query, unrelated atom)
+    without pulling in a transformer model.
+    """
+
+    def __init__(self, dim: int = 1024) -> None:
+        self.dim = int(dim)
+
+    def _encode_one(self, text: str) -> np.ndarray:
+        s = text.lower()
+        vec = np.zeros(self.dim, dtype=np.float32)
+        if len(s) < 3:
+            s = s + "  "  # pad so we always emit at least one trigram
+        for i in range(len(s) - 2):
+            tri = s[i : i + 3]
+            h = int.from_bytes(hashlib.blake2b(tri.encode("utf-8"), digest_size=4).digest(), "little")
+            vec[h % self.dim] += 1.0
+        n = float(np.linalg.norm(vec))
+        if n > 0:
+            vec /= n
+        return vec
+
+    def encode(self, texts: list[str]) -> np.ndarray:
+        if not texts:
+            return np.zeros((0, self.dim), dtype=np.float32)
+        return np.stack([self._encode_one(t) for t in texts], axis=0)
