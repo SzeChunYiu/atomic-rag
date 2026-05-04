@@ -97,8 +97,23 @@ def main() -> None:
     ap.add_argument("--seed_base", type=int, default=1000)
     ap.add_argument("--embedder", choices=["hash", "trigram", "sbert"], default="trigram")
     ap.add_argument("--sbert_model", default="sentence-transformers/all-MiniLM-L6-v2")
+    ap.add_argument(
+        "--skip_embedder_check",
+        action="store_true",
+        help="Skip pre-flight content-blind check (don't use unless debugging)",
+    )
     args = ap.parse_args()
     embedder = _build_embedder(args.embedder, args.sbert_model)
+    if not args.skip_embedder_check:
+        from astro_cs_rag.diagnostics.embedder_sanity import check
+
+        result = check(embedder)
+        print(f"[crowding] embedder check: {result.reason}")
+        if not result.passed:
+            raise SystemExit(
+                f"refusing to run a sweep on a content-blind embedder. {result.reason} "
+                "Pass --skip_embedder_check to override (results will be noise)."
+            )
 
     args.out_dir.mkdir(parents=True, exist_ok=True)
     rows_path = args.out_dir / "crowding_sweep_results.jsonl"
