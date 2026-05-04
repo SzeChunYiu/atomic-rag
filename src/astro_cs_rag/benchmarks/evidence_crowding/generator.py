@@ -39,12 +39,35 @@ _PARAPHRASES_BORN = [
     "{d} is a native of {c}.",
     "{d}, originally from {c}, became a filmmaker.",
 ]
+# "Far" paraphrases — used as low-semantic-similarity distractors.
+# Same fact-template (location-of-person) but different surface form
+# and lexical content, so trigram overlap with _PARAPHRASES_BORN is small.
+_PARAPHRASES_BORN_DISTANT = [
+    "{d} spent their early years in {c}.",
+    "Growing up in {c} shaped {d}'s craft.",
+    "{c} appears repeatedly in {d}'s biography.",
+    "{d}'s childhood unfolded across {c}.",
+]
 _PARAPHRASES_DIRECTED = [
     "{f} was directed by {d}.",
     "The film {f} is the work of director {d}.",
     "{d} directed {f}.",
     "{d} helmed the production of {f}.",
 ]
+
+
+def _born_paraphrase_pool(similarity: str, gold_template: str) -> list[str]:
+    """Pick the distractor-paraphrase pool for the given similarity level.
+
+    high:   same surface form as the gold hop2 (max trigram overlap)
+    medium: any near-paraphrase (the published _PARAPHRASES_BORN list)
+    low:    distant paraphrases that share the fact but not the surface
+    """
+    if similarity == "high":
+        return [gold_template]
+    if similarity == "low":
+        return _PARAPHRASES_BORN_DISTANT
+    return _PARAPHRASES_BORN
 
 
 @dataclass(frozen=True)
@@ -73,20 +96,22 @@ def _distractor_atoms(
     cell: CrowdingCell,
     base_id: str,
     rng: random.Random,
+    gold_hop2_template: str,
 ) -> list[CrowdingAtom]:
     n = cell.n_distractors_per_gold
     atoms: list[CrowdingAtom] = []
+    pool = _born_paraphrase_pool(cell.semantic_similarity, gold_hop2_template)
     for k in range(n):
         kind = ("entity_overlap", "type_overlap", "semantic", "noise")[k % 4]
         if kind == "entity_overlap":
             wrong_country = rng.choice([c for c in _COUNTRIES if c != triple.country])
-            text = rng.choice(_PARAPHRASES_BORN).format(d=triple.director, c=wrong_country)
+            text = rng.choice(pool).format(d=triple.director, c=wrong_country)
             ents = [triple.director, wrong_country]
             ctype = "WHERE"
         elif kind == "type_overlap":
             person = rng.choice([d for d in _DIRECTORS if d != triple.director])
             country = rng.choice(_COUNTRIES)
-            text = rng.choice(_PARAPHRASES_BORN).format(d=person, c=country)
+            text = rng.choice(pool).format(d=person, c=country)
             ents = [person, country]
             ctype = "WHERE"
         elif kind == "semantic":
@@ -175,8 +200,12 @@ def build_dataset(
     queries: list[CrowdingQuery] = []
     for qi, t in enumerate(triples):
         qid = f"{cell.cell_id}::q{qi}"
-        hop1_text = rng.choice(_PARAPHRASES_DIRECTED).format(f=t.film, d=t.director)
-        hop2_text = rng.choice(_PARAPHRASES_BORN).format(d=t.director, c=t.country)
+        # Gold paraphrase deterministic per query so similarity is the only
+        # axis varying across cells with the same seed.
+        hop1_template = _PARAPHRASES_DIRECTED[qi % len(_PARAPHRASES_DIRECTED)]
+        hop2_template = _PARAPHRASES_BORN[qi % len(_PARAPHRASES_BORN)]
+        hop1_text = hop1_template.format(f=t.film, d=t.director)
+        hop2_text = hop2_template.format(d=t.director, c=t.country)
         hop1 = CrowdingAtom(
             atom_id=f"{qid}::hop1", chunk_id="", doc_id="",
             text=hop1_text, claim_type="WHO", is_gold=True, role="hop1",
@@ -188,7 +217,7 @@ def build_dataset(
             entities=[t.director, t.country],
         )
         gold_atoms = [hop1, hop2]
-        distractors = _distractor_atoms(t, cell, qid, rng)
+        distractors = _distractor_atoms(t, cell, qid, rng, hop2_template)
         # bridge_buried: place distractors between hop1 and hop2.
         if cell.chunk_mixing == "bridge_buried" and distractors:
             ordered = [hop1, *distractors, hop2]
